@@ -1,0 +1,43 @@
+{% extends 'painel.html.twig' %}
+
+{% block body %}
+    <h1>Servicos list</h1>
+    
+            <a  class="btn-success" href="{{ path('servico_new') }}">Novo</a>
+       
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Duração</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for servico in servicos %}
+            <tr>
+                <td><a href="{{ path('servico_show', { 'id': servico.id }) }}">{{ servico.id }}</a></td>
+                <td>{{ servico.nome }}</td>
+                <td>{{ servico.descricao }}</td>
+                <td> R$ {{ servico.valor }}</td>
+                <td>{{ servico.duracao }} Minutos</td>
+                <td>
+                    
+                            <a href="{{ path('servico_show', { 'id': servico.id }) }}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>
+                            <a href="{{ path('servico_edit', { 'id': servico.id }) }}">
+                             <span class="glyphicon glyphicon-pencil "> </span>
+                             </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}
