@@ -37,6 +37,10 @@ class Servico
   private $duracao;
   
   
+  public function __toString() 
+  {
+      return $this->nome;
+  }
 
     /**
      * Get id

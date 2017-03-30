@@ -1,0 +1,17 @@
+{% extends 'painel.html.twig' %}
+
+
+{% block body %}
+    <h1>Cadastro de Barbeiro </h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Salvar" class="btn btn-success "/>
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('barbeiro_index') }}" class="btn btn-danger pull-right">Voltar</a>
+        </li>
+    </ul>
+{% endblock %}

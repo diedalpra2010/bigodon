@@ -21,11 +21,17 @@ class ServicoController extends Controller
      * @Route("/", name="servico_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction( Request $request)
     {
+        $ordenar = $request->get('ordenar');
+        
+        $ordenar = ($ordenar!= '') ? $ordenar : "nome"; //if ternario
+        //se $ordenar difernte de vazio, $ordenar recebe o valor de "nome"
+        
         $em = $this->getDoctrine()->getManager();
 
-        $servicos = $em->getRepository('BigodonBundle:Servico')->findAll();
+        $servicos = $em->getRepository('BigodonBundle:Servico')
+                ->findby(array(), array($ordenar => "ASC"));
 
         return $this->render('BigodonBundle:Servico:index.html.twig', array(
             'servicos' => $servicos,
