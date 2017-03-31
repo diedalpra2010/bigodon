@@ -4,6 +4,7 @@ namespace BigodonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use BigodonBundle\Entity\Servico;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -19,31 +20,35 @@ class Barbeiro
    private $id;
    /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="O nome e Obrigatório.") 
      */
    private $nome;
     /**
      * 
      * @ORM\ManyToOne(targetEntity="Servico")
      * @ORM\JoinColumn(name="servicos_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="O serviço e Obrigatório.")
      */
    private $servico;
    /**
      * @ORM\Column(type="string", length=15, nullable=TRUE)
+     * @Assert\Regex(pattern="/\([0-9].\)[9]{0,1}[0-9]{4}-[0-9]{4}/",
+    *       message="O telefone e invalido, informe no formato (99)99999-9999")
      */
    private $telefone;
    /**
      * @ORM\Column(type="string", length=1)
+     * @Assert\NotBlank(message="O sexo e Obrigatório.")
      */
    private $sexo;
    
    /**
-     * @ORM\Column(type="date")
-     */
+    * @ORM\Column(type="date")
+    * @Assert\GreaterThanOrEqual(value="1950-1-1", 
+    *           message="A data informada esta invalida, informa algo maior que {{ compared_value }}")
+    */
    private $dataNascimento;
-   
-   
-
-    /**
+   /**
      * Get id
      *
      * @return integer
