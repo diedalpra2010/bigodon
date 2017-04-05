@@ -1,6 +1,96 @@
 {% extends "base.html.twig"%}
 
 {% block body %}
-Agende seu serviço
+<div class="container">
+    <div>
+        <center>
+        <h1>Agendamento de Horario</h1>
+        </center>
+    </div>
+	<div class="row form-group">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                <li class="active"><a href="#step-1">
+                    <h4 class="list-group-item-heading">Selcione o Serviço</h4>
+                    <p class="list-group-item-text">First step description</p>
+                </a></li>
+                <li class="disabled"><a href="#step-2">
+                    <h4 class="list-group-item-heading">Selecione o Bigodon</h4>
+                    <p class="list-group-item-text">Second step description</p>
+                </a></li>
+                <li class="disabled"><a href="#step-3">
+                    <h4 class="list-group-item-heading">Selecione o Horario</h4>
+                    <p class="list-group-item-text">Third step description</p>
+                </a></li>
+                <li class="disabled"><a href="#step-4">
+                    <h4 class="list-group-item-heading">Confirme seus Dados</h4>
+                    <p class="list-group-item-text">Third step description</p>
+                </a></li>
+            </ul>
+        </div>
+	</div>
+    <div class="row setup-content" id="step-1">
+        <div class="col-xs-12">
+            <div class="col-md-12 well text-center">
+                <h1> Serviços Disponiveis</h1>
+                <select class="form-control" id="sel-servico">
+                     <option value="0">-- Selecione --</option>
+                    {% for opcao in servicos%}
+                    <option value="{{opcao.id}}">{{opcao.nome}}</option>
+                    {% endfor %}
+                  </select>
+                <br>
+                <button id="activate-step-2" class="btn btn-primary btn-lg" disabled>Proximo Passo</button>
+            </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-2">
+        <div class="col-xs-12">
+            <div class="col-md-12 well">
+                <h1 class="text-center"> Bigódon Favorito</h1>
+                
+                <div id="profissionais">
+                </div>
+                
+                <button id="activate-step-3" class="btn btn-primary btn-lg" disabled>Proximo Passo</button>
+            
+            </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-3">
+        <div class="col-xs-12">
+            <div class="col-md-12 well">
+                <h1 class="text-center"> Selecione o horario</h1>
+                
+                <select class="form-control" id="sel-dia">
+                    <option value="0">-- Selecione --</option>
+                     
+                        {% for dia in datas%}
+                            {% if dia |date('N') !=7 %}
+                            <option value="{{dia|date("Y-m-d")}}">  {{dia|date("l - d/m/Y")}}</option>
+                            
+                            {% endif %}
+                        {% endfor %}
+                        
+                </select>
+               <legend>Selecione o Horario</legend>
+                <fieldset id="horarios">
+                   
+                </fieldset>
+                        
+            </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-4">
+        <div class="col-xs-12">
+            <div class="col-md-12 well">
+                <h1 class="text-center"> Confirme!</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
+{% endblock%}
+{% block javascripts %}
+    <script type="text/javascript" src="/js/agendamento.js"></script>
 {% endblock%}
